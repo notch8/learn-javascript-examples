@@ -12,9 +12,15 @@
           <input type='submit' value='done' />
         </form
       <% }else{ %>
-        <span class='complete' >
-          <%= todos[index].name %>
-        </span>
+        <form 
+          action="/todo-list/<%= todoList.get('id') %>/todo/<%= todos[index].get('id') %>/delete" 
+          method="post"
+        >
+          <span class='complete' >
+            <%= todos[index].name %>
+          </span>
+          <input type='submit' value='remove' />
+        </form>
       <% } %>
     </li>
   <% } %>
