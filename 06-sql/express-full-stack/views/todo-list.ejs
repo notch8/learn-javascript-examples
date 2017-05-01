@@ -19,3 +19,14 @@
     </li>
   <% } %>
 </ul>
+
+<div>
+  <h3>New Todo</h3>
+  <form
+    action="/todo-list/<%= todoList.get('id') %>/todo/new"
+    method="post"
+  >
+    <input type='text' name='name' />
+    <input type='submit' value='Add Todo' />
+  </form>
+</div>

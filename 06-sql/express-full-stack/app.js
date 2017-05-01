@@ -43,6 +43,19 @@ app.post('/todo-list/:todoListId/todo/:id/complete', function(request, response)
   })
 })
 
+app.post('/todo-list/:todoListId/todo/new', function(request, response){
+  TodoList.findById(request.params.todoListId).then(function(todoList){
+    return todoList.createTodo({
+      name: request.body.name,
+      isComplete: false
+    })
+  }).then(function(todo){
+    response.redirect("/todo-list/" + request.params.todoListId)
+  }).catch(function(error){
+    response.send("Error, couldn't create Todo")
+  })
+})
+
 app.listen(3000, function () {
  console.log('Example app listening on port 3000!');
 });
