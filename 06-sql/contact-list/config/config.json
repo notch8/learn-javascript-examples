@@ -1,0 +1,16 @@
+{
+  "development": {
+    "username": null,
+    "password": null,
+    "database": "contact-list-dev",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": null,
+    "password": null,
+    "database": "contact-list-test",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  }
+}
