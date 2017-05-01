@@ -4,9 +4,25 @@
   <% for(index in todoLists){ %>
     <% let todoList = todoLists[index] %>
     <li>
-      <a href="/todo-list/<%= todoList.get('id') %>">
-        <%= todoList.get('name') %>
-      </a>
+      <form
+        action="/todo-list/<%= todoList.get('id') %>/delete"
+        method="post"
+      >
+        <a href="/todo-list/<%= todoList.get('id') %>">
+          <%= todoList.get('name') %>
+        </a>
+        <input type='submit' value='Delete' />
+      </form>
     </li>
   <% } %>
 </ul>
+
+<div>
+  <form 
+    action="/todo-list/new"
+    method="post"
+  >
+    <input type='text' name='name' />
+    <input type='submit' value='Create Todo List' />
+  </form>
+</div>
