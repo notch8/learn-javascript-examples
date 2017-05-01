@@ -1,7 +1,6 @@
 ## LEARN Javascript Immersive Examples
 
 ## This repository has the examples used for the Javascript Immersive class
-
 ## Running these applications
 
 In order to run these applications follow these steps.
