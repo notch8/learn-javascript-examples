@@ -1,0 +1,304 @@
+q
+\
+\q
+grant ALL to postgres;
+grant ALL on *.* to postgres;
+grant ALL on * to postgres;
+grant admins to postgres
+;
+grant all privileges to postgres on optimus_dev;
+grant all privileges on optimus_dev to mclark;
+grant all privileges on database optimus_dev to mclark;
+grant all privileges on database audience_db_test to mclark;
+grant all privileges on database optimus_dev to postgres;
+alter user mclark superuser;
+exit
+\q
+grant all privileges on database optimus_dev to postgres;
+alter user postgres superuser;
+\q
+alter user postgres superuser;
+\q
+grant all privileges on database optimus_dev to postgres;
+\q
+\list
+\dt
+create database hos_dev
+;
+\du
+grant all on hos_dev to mclark
+;
+grant all on *@hos_dev to mclark;
+grant all privileges on *.hos_dev to mclark;
+grant all privileges on hos_dev to mclark;
+\exit
+\end
+\q
+CREATE USER "pgh-dev" WITH PASSWORD 'pgh-dev' CREATEDB;
+\q
+/q
+q
+/q
+/quit
+/exit
+\q
+\q
+q
+exit
+/q
+/h
+\h
+\quit
+\l
+\a
+\q
+show databases;
+\q
+/Q
+/E
+\q
+CREATE EXTENSION pgcrypto;
+q
+/
+/q
+;
+exit
+quit
+e
+;
+/q
+;
+?
+;
+/?
+;
+/quit
+exit
+;
+/exit
+;
+\q
+grant admins to pgh-dev;
+grant admins to pgh-dev
+;
+grant admins to 'pgh-dev';
+GRANT admins TO pgh-dev;
+GRANT admins TO "pgh-dev";
+GRANT admin TO "pgh-dev";
+GRANT superuser TO "pgh-dev";
+GRANT superusers TO "pgh-dev";
+select rolname from pg_roles;
+GRANT postgres TO "pgh-dev";
+GRANT mclark TO "pgh-dev";
+exit
+/quit
+;
+/quit
+;
+\quit
+\d schema_versions
+\dt
+\d schema_migrations 
+\q
+\q
+\q
+select count(*) from codes;
+select count(*) from code;
+SELECT \"code\".* FROM \"code\" code as child on code.code_value = substring(child.code_value,0,2) WHERE \"code\".\"code_type_uuid\" = 'f62b82ec-bfb2-4a4b-9a45-262e8bd54ee9' AND (length(code_value) > 2)
+;
+SELECT code.* FROM code, code as child on code.code_value = substring(child.code_value,0,2) WHERE \"code\".\"code_type_uuid\" = 'f62b82ec-bfb2-4a4b-9a45-262e8bd54ee9' AND (length(code_value) > 2)
+SELECT code.* FROM code left inner join code as child on code.code_value = substring(child.code_value,0,2) WHERE \"code\".\"code_type_uuid\" = 'f62b82ec-bfb2-4a4b-9a45-262e8bd54ee9' AND (length(code_value) > 2)
+SELECT code.* FROM code left inner join code as child on code.code_value = substring(child.code_value,0,2) WHERE \"code\".\"code_type_uuid\" = 'f62b82ec-bfb2-4a4b-9a45-262e8bd54ee9' AND (length(code_value) > 2);
+SELECT code.* FROM code left inner join code as child on code.code_value = substring(child.code_value,0,2) WHERE code.code_type_uuid = 'f62b82ec-bfb2-4a4b-9a45-262e8bd54ee9' AND (length(code_value) > 2);
+\q
+COPY taxonomies (id, name, created_at, updated_at, "position", image_url) FROM stdin;
+12      Behavioral Health       2014-12-18 23:03:35.990547      2014-12-18 23:03:35.990547      0       \N
+15      Imaging 2014-12-18 23:03:37.66975       2014-12-18 23:03:37.66975       0       \N
+16      Immunizations and Vaccinations  2014-12-18 23:03:38.496511      2014-12-18 23:03:38.496511      0       \N
+17      Primary Care    2014-12-18 23:03:39.112489      2014-12-18 23:03:39.112489      0       \N
+11      Hearing 2014-12-18 23:03:35.80456       2015-01-07 18:44:17.273814      0
+14      Dentistry       2014-12-18 23:03:36.877748      2015-01-07 18:44:32.977589      0
+10      Allergy 2014-12-18 23:03:35.547343      2015-01-22 23:00:42.346828      0
+13      Chiropractic, Acupuncture and Massage   2014-12-18 23:03:36.200792      2015-02-15 02:25:24.90562       0
+20      Health and Nutrition    2015-10-01 00:05:35.423778      2015-10-01 18:57:59.07372       0
+19      Rehabilitation  2014-12-22 07:48:48.231004      2015-10-27 23:39:04.310377      0
+18      Vision and Eye Exams    2014-12-18 23:03:43.14349       2015-10-29 00:31:02.020879      0
+\.
+\c swh_service_catalog_development 
+COPY taxonomies (id, name, created_at, updated_at, "position", image_url) FROM stdin;
+12      Behavioral Health       2014-12-18 23:03:35.990547      2014-12-18 23:03:35.990547      0       \N
+15      Imaging 2014-12-18 23:03:37.66975       2014-12-18 23:03:37.66975       0       \N
+16      Immunizations and Vaccinations  2014-12-18 23:03:38.496511      2014-12-18 23:03:38.496511      0       \N
+17      Primary Care    2014-12-18 23:03:39.112489      2014-12-18 23:03:39.112489      0       \N
+11      Hearing 2014-12-18 23:03:35.80456       2015-01-07 18:44:17.273814      0
+14      Dentistry       2014-12-18 23:03:36.877748      2015-01-07 18:44:32.977589      0
+10      Allergy 2014-12-18 23:03:35.547343      2015-01-22 23:00:42.346828      0
+13      Chiropractic, Acupuncture and Massage   2014-12-18 23:03:36.200792      2015-02-15 02:25:24.90562       0
+20      Health and Nutrition    2015-10-01 00:05:35.423778      2015-10-01 18:57:59.07372       0
+19      Rehabilitation  2014-12-22 07:48:48.231004      2015-10-27 23:39:04.310377      0
+18      Vision and Eye Exams    2014-12-18 23:03:43.14349       2015-10-29 00:31:02.020879      0
+\.
+exit
+\q
+\d taxonomies
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+COPY taxonomies (id, name, created_at, updated_at, "position", image_url) FROM stdin;
+\q
+/q
+exit
+q
+\q
+\q
+\q
+create database countries;
+quit
+;
+\quit
+create database us-states;
+create database 'us-states';
+create database usStates;
+\quit
+show databases
+;
+create database usStates;
+create database us_states;
+\quit
+drop database us_states;
+create database us_states;
+\quit
+drop database us_states;
+create database us_states;
+\quit
+\quit
+describe us_states
+;
+describe table us_states;
+us_states
+;
+select * from us_states;
+\quit
+select * from us_states;
+\quit
+drop database us_states;
+create database us_states;
+\quit
+drop database us_states;
+drop database united_states;
+create database united_states;
+\quit
+use united_states;
+\quit
+show tables;
+describe tables;
+list
+;
+list tables;
+select * from us_states;
+slect * from people;
+select * from people;
+select * from us_states;
+\quit
+create database Contacts
+use database Contacts;
+create database Contacts;
+use database Contacts;
+\connect Contacts
+\connect Contacts
+create database Contacts
+;
+\connect contacts
+create table phones (
+id serial PRIMARY KEY,
+contact_id integer REFERENCES contacts(id) NOT NULL,
+number varchar,
+description varchar);
+create table contacts (id serial PRIMARY KEY, name varchar, email varchar);
+drop table contacts
+;
+create table contacts (id serial PRIMARY KEY, name varchar, email varchar, dob timestamp);
+insert into contacts (name, email, dob) values ('Joe', 'joe@home.com', '1990-05-01');
+create table phones (
+id serial PRIMARY KEY,
+contact_id integer REFERENCES contacts(id) NOT NULL,
+number varchar,
+description varchar);
+\d phones
+insert into phones (contact_id, number, description) values (1, '555-1212', 'cell');
+insert into phones (contact_id, number, description) values (1, '333-2121', 'wife');
+\q
+\d contacts
+drop table contacts
+;
+drop table phones;
+drop table contacts
+;
+create table phones (
+id serial PRIMARY KEY,
+contact_id integer REFERENCES contacts(id) NOT NULL,
+number varchar,
+description varchar);
+create table contacts (id serial PRIMARY KEY, name varchar, email varchar, dob timestamp, createdAt timestamp, updatedAt timestamp);
+create table phones (
+id serial PRIMARY KEY,
+contact_id integer REFERENCES contacts(id) NOT NULL,
+number varchar, createdAt timestamp, updatedAt timestamp,
+description varchar);
+insert into phones (contact_id, number, description) values (1, '333-2121', 'wife');
+insert into contacts (name, email, dob) values ('Joe', 'joe@home.com', '1990-05-01');
+insert into phones (contact_id, number, description) values (1, '333-2121', 'wife');
+\d phones
+drop table phones;
+create table phones (
+id serial PRIMARY KEY,
+contact_id integer REFERENCES contacts(id) NOT NULL,
+number varchar, 'createdAt' timestamp, 'updatedAt' timestamp,
+description varchar);
+create table phones (
+id serial PRIMARY KEY,
+contact_id integer REFERENCES contacts(id) NOT NULL,
+number varchar, "createdAt" timestamp, "updatedAt" timestamp,
+description varchar);
+drop table contacts;
+drop table phones;
+drop table contacts;
+create table phones (
+id serial PRIMARY KEY,
+contact_id integer REFERENCES contacts(id) NOT NULL,
+number varchar, "createdAt" timestamp, "updatedAt" timestamp,
+description varchar);
+create table contacts (id serial PRIMARY KEY, name varchar, email varchar, dob timestamp, "createdAt" timestamp, "updatedAt" timestamp);
+\d contacts
+create table phones (
+id serial PRIMARY KEY,
+contact_id integer REFERENCES contacts(id) NOT NULL,
+number varchar, "createdAt" timestamp, "updatedAt" timestamp,
+description varchar);
+insert into contacts (name, email, dob) values ('Joe', 'joe@home.com', '1990-05-01');
+insert into phones (contact_id, number, description) values (1, '333-2121', 'wife');
+insert into phones (contact_id, number, description) values (1, '555-1212', 'cell');
+drop table contacts;
+drop table phones;
+create table contacts (id serial PRIMARY KEY, name varchar, email varchar, dob timestamp, "createdAt" timestamp, "updatedAt" timestamp);
+create table phones (
+id serial PRIMARY KEY,
+"contactId" integer REFERENCES contacts(id) NOT NULL,
+number varchar, "createdAt" timestamp, "updatedAt" timestamp,
+description varchar);
+insert into phones (contact_id, number, description) values (1, '555-1212', 'cell');
+insert into phones (contactId, number, description) values (1, '555-1212', 'cell');
+insert into phones ("contactId", number, description) values (1, '555-1212', 'cell');
+insert into phones ("contactId", number, description) values (1, '333-2121', 'wife');
+\q
+\d my_countries
+\q
+drop table my_countries;
+\q
+select * from Todos;
+select * from todos;
+select * from todo;
+\s tables;

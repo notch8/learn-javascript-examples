@@ -1,0 +1,12 @@
+<h2>My Todo Lists </h2>
+
+<ul>
+  <% for(index in todoLists){ %>
+    <% let todoList = todoLists[index] %>
+    <li>
+      <a href="/todo-list/<%= todoList.get('id') %>">
+        <%= todoList.get('name') %>
+      </a>
+    </li>
+  <% } %>
+</ul>

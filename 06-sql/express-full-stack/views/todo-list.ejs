@@ -1,0 +1,21 @@
+<h2><%= todoList.get('name') %></h2>
+
+<ul>
+  <% for(index in todos){ %>
+    <li>
+      <% if(!todos[index].isComplete){ %>
+        <form 
+          action="/todo-list/<%= todoList.get('id') %>/todo/<%= todos[index].get('id') %>/complete" 
+          method="post"
+        >
+          <%= todos[index].name %>
+          <input type='submit' value='done' />
+        </form
+      <% }else{ %>
+        <span class='complete' >
+          <%= todos[index].name %>
+        </span>
+      <% } %>
+    </li>
+  <% } %>
+</ul>
