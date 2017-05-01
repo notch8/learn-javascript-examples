@@ -37,28 +37,7 @@ app.get('/todo-list/:id', function(request, response){
 
 // ################# Manage Todo Lists #############################
 
-app.post('/todo-list/new', function(request, response){
-  TodoList.create({
-    name: request.body.name
-  }).then(function(todo){
-    response.redirect("/")
-  }).catch(function(error){
-    response.send("Error, couldn't create Todo List")
-  })
-})
-
-
-app.post('/todo-list/:id/delete', function(request, response){
-  TodoList.findById(request.params.id).then(function(todoList){
-    return todoList.destroy()
-  }).then(function(todo){
-    response.redirect("/")
-  }).catch(function(error){
-    response.send("Error, couldn't delete Todo")
-  })
-})
-
-
+// Add Your code here
 
 // ################## Manage Todo Items in List ####################
 
