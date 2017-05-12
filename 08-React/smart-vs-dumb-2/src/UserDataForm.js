@@ -1,53 +1,52 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-class UserDataForm extends Component {
+export default class UserDataForm extends Component {
   constructor(props){
     super(props)
     this.state = props.userData
   }
-
-  handleUpdate(event){
-
+  handleChange(event){
     const target = event.target
-    const attribute = target.name
-    const value = target.value
-    this.setState({[attribute]: value})
+    const value = target.type === 'checkbox' ? target.checked : target.value
+    const name = target.name
+    this.setState({[name]: value})
   }
 
   handleLanguageChange(event){
     const target = event.target
-    const attribute = target.name
     const value = target.checked
-
-    const languages = this.state.languages
-    languages[attribute] = value
+    const name = target.name
+    let languages = this.state.languages
+    languages[name] = value
     this.setState({languages: languages})
   }
 
   handleSubmit(event){
-    this.props.userDataUpdated(this.state)
+    this.props.onSave(this.state)
     event.preventDefault()
   }
 
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit.bind(this)} >
+        <form onSubmit={this.handleSubmit.bind(this)}>
           <h3>Text Input</h3>
           <label>Name</label>
           <br />
           <input 
             name='name' 
             value={this.state.name} 
-            onChange={this.handleUpdate.bind(this)} />
+            onChange={this.handleChange.bind(this)} 
+          />
 
           <h3>Textarea</h3>
-          <label>Description</label>
+          <label>Describe Yourself</label>
           <br />
-          <textarea
-            name='description'
-            value={this.state.description}
-            onChange={this.handleUpdate.bind(this)} />
+          <textarea 
+            name='description' 
+            value={this.state.description} 
+            onChange={this.handleChange.bind(this)} 
+          />
 
           <h3>Select</h3>
           <label>Pet</label>
@@ -55,7 +54,7 @@ class UserDataForm extends Component {
           <select 
             name='pet' 
             value={this.state.pet} 
-            onChange={this.handleUpdate.bind(this)} 
+            onChange={this.handleChange.bind(this)} 
           >
             <option></option>
             <option value='Dog'>Dog</option>
@@ -70,7 +69,7 @@ class UserDataForm extends Component {
             name='education' 
             value="High School" 
             checked={this.state.education === 'High School'} 
-            onChange={this.handleUpdate.bind(this)} 
+            onChange={this.handleChange.bind(this)} 
           />
           High School
           <br />
@@ -79,7 +78,7 @@ class UserDataForm extends Component {
             name='education' 
             value="College" 
             checked={this.state.education === 'College'} 
-            onChange={this.handleUpdate.bind(this)}
+            onChange={this.handleChange.bind(this)} 
           />
           College
 
@@ -106,12 +105,7 @@ class UserDataForm extends Component {
           <input type='submit' value='Submit' />
         </form>
       </div>
-
-
-
-
     );
   }
 }
 
-export default UserDataForm;
