@@ -1,13 +1,29 @@
 import EventEmitter from 'events'
+import dispatcher from '../Dispatcher'
 
 class Board extends EventEmitter{
   constructor(){
     super()
+    this.winner = false
     this.squares = ["","","","","","","","",""]
+    this.winningCombos = [
+      [0, 1, 2], 
+      [3, 4, 5], 
+      [6, 7, 8], 
+      [0, 3, 6], 
+      [1, 4, 7], 
+      [2, 5, 8], 
+      [0, 4, 8], 
+      [2, 4, 6]
+    ]
   }
 
   getSquares(){
     return this.squares
+  }
+
+  getWinner(){
+    return this.winner
   }
 
   setSquare(index, player){
@@ -15,9 +31,44 @@ class Board extends EventEmitter{
       this.squares[index] = player
     }
 
+    this.winner = this.gameIsWon()
+
     this.emit('changed')
+  }
+
+  resetBoard(){
+    this.squares = ["","","","","","","","",""]
+    this.winner = false
+  }
+
+  gameIsWon(){
+    var winner = false
+    this.winningCombos.forEach(function(combo){
+      if(this.squares[combo[0]] === this.squares[combo[1]] && this.squares[combo[1]] === this.squares[combo[2]]){
+        winner = this.squares[combo[0]]
+      }
+    }.bind(this))
+
+    return winner
+  }
+
+  handleChange(action){
+    console.log(action)
+    switch(action.type){
+      case('SQUARE_CLICK'):{
+        this.setSquare(action.index, action.player)
+        break
+      }
+      case('RESET_GAME'):{
+        this.resetBoard()
+        break
+      }
+      default: {}
+    }
+    this.setSquare()
   }
 }
 
 let board = new Board()
+dispatcher.register(board.handleChange.bind(board))
 export default board

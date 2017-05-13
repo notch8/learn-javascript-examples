@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
 import Board from './stores/Board'
+import Players from './stores/Players'
+import {squareClick} from './actions/GameActions'
+import WinnerAlert from './WinnerAlert'
 
 class App extends Component {
   constructor(){
@@ -11,13 +14,23 @@ class App extends Component {
   }
 
   componentWillMount(){
-    Board.on('changed', function(){
-      this.setState({squares: Board.getSquares()})
-    }.bind(this))
+    Board.on('changed', this.handleBoardChange.bind(this))
+  }
+
+  componentWillUnmount(){
+    Board.removeListener('changed', this.handleBoardChange)
+  }
+
+  handleBoardChange(){
+    this.setState({
+      squares: Board.getSquares(),
+      winner: Board.getWinner()
+    })
   }
 
   handleClick(event){
-    console.log(event.target.dataset.id)
+    const currentPlayer = Players.currentPlayer()
+    squareClick(event.target.dataset.id, currentPlayer)
   }
 
   render() {
@@ -33,7 +46,8 @@ class App extends Component {
       ) 
     }.bind(this))
     return (
-      <div className="App">
+      <div>
+        <WinnerAlert winner={this.state.winner} />
         <div className="board">
           {squares}
         </div>

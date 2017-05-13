@@ -5,6 +5,7 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
+  margin-left: 4px;
 }
 
 .square{
@@ -23,3 +24,12 @@
   background-color: green;
 }
 
+.winner-container{
+  height: 6em;
+}
+.winner{
+  border: 1px solid green;
+  margin-bottom: 4px;
+  padding: 4px;
+  background-color: green;
+}
