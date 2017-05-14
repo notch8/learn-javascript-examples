@@ -1,9 +1,5 @@
-import EventEmitter from 'events'
-import dispatcher from '../Dispatcher'
-
-class Board extends EventEmitter{
+class Board {
   constructor(){
-    super()
     this.winner = false
     this.squares = ["","","","","","","","",""]
     this.winningCombos = [
@@ -32,8 +28,6 @@ class Board extends EventEmitter{
     }
 
     this.winner = this.gameIsWon()
-
-    this.emit('changed')
   }
 
   resetBoard(){
@@ -51,24 +45,7 @@ class Board extends EventEmitter{
 
     return winner
   }
-
-  handleChange(action){
-    console.log(action)
-    switch(action.type){
-      case('SQUARE_CLICK'):{
-        this.setSquare(action.index, action.player)
-        break
-      }
-      case('RESET_GAME'):{
-        this.resetBoard()
-        break
-      }
-      default: {}
-    }
-    this.setSquare()
-  }
 }
 
 let board = new Board()
-dispatcher.register(board.handleChange.bind(board))
 export default board
