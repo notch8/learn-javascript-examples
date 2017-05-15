@@ -5,18 +5,24 @@ import MenuItems from '../stores/MenuItems'
 class Menu extends Component {
   constructor(props){
     super(props)
+    this.setAllMainCourses = this.setAllMainCourses.bind(this)
     this.state = {
       newCourseName: 'Course Name',
       mainCourses: MenuItems.getAllMainCourses()
     }
   }
 
+  setAllMainCourses(){
+    this.setState({
+      mainCourses: MenuItems.getAllMainCourses()
+    })
+  }
   componentWillMount(){
-    MenuItems.on('change', function(){
-      this.setState({
-        mainCourses: MenuItems.getAllMainCourses()
-      })
-    }.bind(this))
+    MenuItems.on('change', this.setAllMainCourses)
+  }
+
+  componentWillUnmount(){
+    MenuItems.removeListener('change', this.setAllMainCourses)
   }
 
   handleNewCourseNameChange(event){
