@@ -25,7 +25,13 @@ module.exports = function(sequelize, DataTypes) {
         notEmpty: true
       }
     },
-    password: DataTypes.STRING,
+    password: {
+      type: DataTypes.STRING,
+      set(value){
+        this.setSalt()
+        this.setDataValue('password', this.getEncryptedPassword(value))
+      }
+    },
     authToken: DataTypes.STRING,
     authTokenExpiration: DataTypes.DATE,
     salt: DataTypes.STRING
@@ -41,24 +47,28 @@ module.exports = function(sequelize, DataTypes) {
           authTokenExpiration: this.authTokenExpiration 
         }
       },
+
       setAuthToken: function(){
         this.authToken = uuid()
-
         let expiration = new Date()
         expiration.setMonth(expiration.getMonth() + 1)
         this.authTokenExpiration = expiration
       },
+
       setSalt: function(){
         this.salt = uuid()
       },
+
       getEncryptedPassword: function(password){
         const hash = crypto.createHmac('sha512', this.salt.toString())
         hash.update(password.toString())
         return hash.digest('hex')
       },
+
       encryptPassword: function(){
         this.password = this.getEncryptedPassword(this.password)
       },
+
       verifyPassword: function(password){
         let unverifiedPassword = this.getEncryptedPassword(password)
         return this.password === unverifiedPassword
@@ -67,8 +77,6 @@ module.exports = function(sequelize, DataTypes) {
     hooks:{
       beforeCreate: function(user, options){
         user.setAuthToken()
-        user.setSalt()
-        user.encryptPassword()
       }
     },
     classMethods: {

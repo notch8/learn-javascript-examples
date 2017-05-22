@@ -42,5 +42,4 @@ class MenuItems extends EventEmitter{
 
 const menuItems = new MenuItems()
 Dispatcher.register(menuItems.handleActions.bind(menuItems))
-window.dispatcher = Dispatcher
 export default menuItems 
